@@ -1,0 +1,81 @@
+Flight Delay Prediction – Data Science Portfolio Project
+
+Objective:
+Predict whether a flight will arrive late (ARR_DELAY > 15 minutes) using historical flight data, focusing on improving machine learning performance on imbalanced classes.
+
+Dataset:
+
+Source: Bureau of Transportation Statistics – On-Time Performance
+
+Size: ~100k flights from multiple carriers and airports
+
+Key columns used:
+
+Flight date, day of week, carrier
+
+Origin and destination airports
+
+Scheduled departure and arrival times
+
+Distance and scheduled elapsed time
+
+Cancellation and diversion flags
+
+Data Preprocessing & Feature Engineering:
+
+Removed cancelled or diverted flights and dropped missing arrival delays.
+
+Binned departure times into morning, afternoon, evening, night to capture time-of-day effects.
+
+Kept top 10 busiest airports for origin and destination; all others labeled “Other” to reduce categorical explosion.
+
+Converted categorical features to strings and ensured numeric features were numeric.
+
+Handling Class Imbalance:
+
+The dataset had far fewer delayed flights than on-time flights.
+
+Used SMOTE (Synthetic Minority Over-sampling Technique) to oversample delayed flights.
+
+Modeling:
+
+Random Forest Classifier trained on 50–100% of the dataset.
+
+Preprocessing pipeline: One-hot encoding for categorical features + passthrough for numeric features.
+
+Metrics used: Accuracy, precision, recall, F1-score.
+
+Results (full dataset, Random Forest + SMOTE):
+
+Accuracy: 0.804
+Class 0 (on-time): Precision=0.83, Recall=0.96, F1=0.89
+Class 1 (delayed): Precision=0.38, Recall=0.10, F1=0.16
+
+
+Accuracy appears high, but model struggles to identify delayed flights due to class imbalance.
+
+Using SMOTE and full dataset improved recall from ~5% to ~10% for delayed flights.
+
+Feature Importance:
+
+The top predictive features included:
+
+Carrier
+
+Departure time bin
+
+Origin and destination airport
+
+Distance and scheduled elapsed time
+
+Visualization of the top 20 features highlights which factors drive delays.
+
+Conclusion / Insights:
+
+Time of day, carrier, and airport strongly influence delays.
+
+Handling class imbalance is critical for predicting rare events like flight delays.
+
+Random Forest provides a solid baseline; XGBoost or LightGBM could further improve recall for delayed flights.
+
+This project demonstrates end-to-end data science skills: data preprocessing, feature engineering, handling imbalanced data, building machine learning pipelines, and interpreting model results.
